@@ -27,3 +27,4 @@ executable aoc2016
                      , mtl
                      , containers
                      , array
+                     , split

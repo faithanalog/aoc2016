@@ -2,6 +2,7 @@ module Days.Prelude
   ( Day(..)
   , module Text.Trifecta
   , module Data.List 
+  , module Data.List.Split
   , module Control.Lens
   , module Control.Applicative
   , module Control.Monad.State
@@ -10,6 +11,7 @@ module Days.Prelude
 
 import Text.Trifecta hiding (noneOf)
 import Data.List hiding (uncons, span)
+import Data.List.Split hiding (oneOf, endBy, sepBy)
 import Control.Lens
 import Control.Applicative
 import Control.Monad.State
