@@ -9,7 +9,7 @@ type Tri = [Integer]
 valid [a, b, c] = a + b > c && a + c > b && b + c > a
 
 part1 = length . filter valid
-part2 = length . filter valid . concatMap transpose . chunksOf 3
+part2 = part1 . concatMap transpose . chunksOf 3
 
 day3 =
   Day
