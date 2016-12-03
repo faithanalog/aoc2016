@@ -2,9 +2,9 @@ Advent of Code 2016
 ===================
 
 I'm working through the [Advent of Code](http://adventofcode.com/), trying to
-solve them all in haskell. I'm not going for any sort of efficiency initially,
+solve them all in haskell. I'm not going for any sort of efficiency initially;
 as long as the solutions run fast enough on my computer to get the answers
-within a reasonable amount of time.
+within a reasonable amount of time, I'm ok with it.
 
 I'm using trifecta and lens, so the initial dependency build might take a bit
 of time on a weaker processor. Such is the way with these nice libraries.
