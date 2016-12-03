@@ -25,4 +25,4 @@ day3 =
             b <- natural
             c <- natural
             pure [a, b, c]
-      many (char ' ') >> many tri
+      whiteSpace >> many tri
