@@ -1,4 +1,3 @@
-{-# LANGUAGE TemplateHaskell #-}
 module Days.Prelude
   ( Day(..)
   , module Text.Trifecta
@@ -22,12 +21,10 @@ data Day a b c = Day
   , _dayPart2 :: a -> c
   }
 
-makeLenses ''Day
-
 runDay :: (Show b, Show c) => Day a b c -> String -> IO ()
 runDay d f = do
-  input <- parseFromFile (d ^. parser) f
+  input <- parseFromFile (_parser d) f
   putStrLn "Part 1:"
-  mapM_ (print . (d ^. dayPart1)) input
+  mapM_ (print . _dayPart1 d) input
   putStrLn "Part 2:"
-  mapM_ (print . (d ^. dayPart2)) input
+  mapM_ (print . _dayPart2 d) input
