@@ -8,8 +8,6 @@ import Days.Prelude
 import Data.Array.IArray
 
 
-data Act = U | R | D | L | P
-
 data Pos = Pos
   { _x :: Int
   , _y :: Int
@@ -48,11 +46,11 @@ move m f p
 
 press m p = p & code %~ (++ [digitAt m p])
 
-act m U = move m (y -~ 1)
-act m D = move m (y +~ 1)
-act m L = move m (x -~ 1)
-act m R = move m (x +~ 1)
-act m P = press m
+act m 'U' = move m (y -~ 1)
+act m 'D' = move m (y +~ 1)
+act m 'L' = move m (x -~ 1)
+act m 'R' = move m (x +~ 1)
+act m '\n' = press m
 
 solve m = view code . foldl' (flip (act m)) (Pos x y [])
   where
@@ -69,13 +67,5 @@ day2 =
   , _dayPart2 = part2
   }
   where
-    parser :: Parser [Act]
-    parser =
-      some $
-      choice
-        [ char 'U' >> pure U
-        , char 'R' >> pure R
-        , char 'D' >> pure D
-        , char 'L' >> pure L
-        , char '\n' >> pure P
-        ]
+    parser :: Parser [Char]
+    parser = some (oneOf "URDL\n")
