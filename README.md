@@ -6,6 +6,9 @@ solve them all in haskell. I'm not going for any sort of efficiency initially,
 as long as the solutions run fast enough on my computer to get the answers
 within a reasonable amount of time.
 
+I'm using trifecta and lens, so the initial dependency build might take a bit
+of time on a weaker processor. Such is the way with these nice libraries.
+
 Build with `stack build`
 
 Run with `stack exec aoc2016 <day>`
