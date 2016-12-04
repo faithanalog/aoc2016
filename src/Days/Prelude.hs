@@ -9,10 +9,10 @@ module Days.Prelude
   , runDay
   ) where
 
-import Text.Trifecta hiding (noneOf)
+import Text.Trifecta
 import Data.List hiding (uncons, span)
 import Data.List.Split hiding (oneOf, endBy, sepBy)
-import Control.Lens
+import Control.Lens hiding (noneOf)
 import Control.Applicative
 import Control.Monad.State
 

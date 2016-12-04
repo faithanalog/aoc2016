@@ -5,21 +5,23 @@ module Days.Day2
   ) where
 
 import Days.Prelude
+import Linear.V2
 import Data.Array.IArray
 
 
-data Pos = Pos
-  { _x :: Int
-  , _y :: Int
-  , _code :: [Char]
+data KeypadState = KeypadState
+  { _pos :: !(V2 Int)
+  , _code :: ![Char]
   }
 
-makeLenses ''Pos
 
-type Pad = Array (Int, Int) Char
+
+makeLenses ''KeypadState
+
+type Pad = Array (V2 Int) Char
 
 keyPad1 :: Pad
-keyPad1 = listArray ((0, 0), (4, 4))
+keyPad1 = listArray (pure 0, pure 4)
   "     \
   \ 123 \
   \ 456 \
@@ -27,7 +29,7 @@ keyPad1 = listArray ((0, 0), (4, 4))
   \     "
 
 keyPad2 :: Pad
-keyPad2 = listArray ((0, 0), (6, 6))
+keyPad2 = listArray (pure 0, pure 6)
   "       \
   \   1   \
   \  234  \
@@ -36,25 +38,25 @@ keyPad2 = listArray ((0, 0), (6, 6))
   \   D   \
   \       "
 
-digitAt m p = m ! (p ^. y, p ^. x)
+digitAt m p = m ! (p ^. pos)
 
 canMoveTo m p = digitAt m p /= ' '
 
-move m f p
-  | canMoveTo m (f p) = f p
+move m d p
+  | canMoveTo m (p & pos +~ d) = p & pos +~ d
   | otherwise = p
 
 press m p = p & code %~ (++ [digitAt m p])
 
-act m 'U' = move m (y -~ 1)
-act m 'D' = move m (y +~ 1)
-act m 'L' = move m (x -~ 1)
-act m 'R' = move m (x +~ 1)
+act m 'U' = move m (V2 (-1) 0)
+act m 'D' = move m (V2 1 0)
+act m 'L' = move m (V2 0 (-1))
+act m 'R' = move m (V2 0 1)
 act m '\n' = press m
 
-solve m = view code . foldl' (flip (act m)) (Pos x y [])
+solve m = view code . foldl' (flip (act m)) (KeypadState initialPosition [])
   where
-    (y,x) = fst . head . filter ((== '5') . snd) $ assocs m
+    initialPosition = fst . head . filter ((== '5') . snd) $ assocs m
 
 part1 = solve keyPad1
 
