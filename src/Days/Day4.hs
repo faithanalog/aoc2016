@@ -35,6 +35,7 @@ calcChecksum =
     -- Sort and group by the same function. Sorts in descending order
     sortDAndGroupBy f = groupBy (on (==) f) . sortBy (on (flip compare) f)
 
+validRooms :: [Room] -> [Room]
 validRooms = filter (\x -> calcChecksum (x ^. name) == x ^. checksum)
 
 -- Rotate a lowercase letter once forward, wrapping around
@@ -45,15 +46,21 @@ rotate c = toEnum (((fromEnum c - o) + 1) `mod` 26 + o)
     o = fromEnum 'a' :: Int
 
 -- All possible rotations of a string
+rotations :: String -> [String]
 rotations str = take 26 $ iterate (map rotate) str
 
 -- Check every possible Caesar cipher for the word "north" and "pole"
 -- Checking for "north" only seems to work, but just in case I added pole too
+isNorth :: String -> Bool
 isNorth = any (\x -> isInfixOf "north" x && isInfixOf "pole" x) . rotations
 
+part1 :: [Room] -> Integer
 part1 = sumOf (folded . sector) . validRooms
+
+part2 :: [Room] -> Integer
 part2 = view sector . head . filter (isNorth . view name) . validRooms
 
+day4 :: Day [Room] Integer Integer
 day4 =
   Day
   { _parser = parser
