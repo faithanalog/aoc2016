@@ -17,23 +17,23 @@ makeLenses ''Room
 
 calcChecksum :: String -> String
 calcChecksum =
-  map head .              -- We only want one of each letter.
+  map head .               -- We only want one of each letter.
 
-  take 5 .                -- Get the top 5 frequent letters
+  take 5 .                 -- Get the top 5 frequent letters
 
-  concatMap sort .        -- Sort each subgroup of letters. This servers to
-                          -- alphabetically sort the equal-length lists
+  concatMap sort .         -- Sort each subgroup of letters. This servers to
+                           -- alphabetically sort the equal-length lists
                           
-  sortAndGroupBy length . -- Sort by the length of each group of letters, group
-                          -- letters together
+  sortDAndGroupBy length . -- Sort by the length of each group of letters, group
+                           -- letters together
                           
-  sortAndGroupBy id .     -- Group letters into lists of each letter
+  sortDAndGroupBy id .     -- Group letters into lists of each letter
 
-  filter isLetter         -- Remove dashes
+  filter isLetter          -- Remove dashes
 
   where
-    -- Sort and group by the same function
-    sortAndGroupBy f = groupBy (on (==) f) . sortBy (on (flip compare) f)
+    -- Sort and group by the same function. Sorts in descending order
+    sortDAndGroupBy f = groupBy (on (==) f) . sortBy (on (flip compare) f)
 
 validRooms = filter (\x -> calcChecksum (x ^. name) == x ^. checksum)
 
