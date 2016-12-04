@@ -48,6 +48,7 @@ rotate c = toEnum (((fromEnum c - o) + 1) `mod` 26 + o)
 rotations str = take 26 $ iterate (map rotate) str
 
 -- Check every possible Caesar cipher for the word "north" and "pole"
+-- Checking for "north" only seems to work, but just in case I added pole too
 isNorth = any (\x -> isInfixOf "north" x && isInfixOf "pole" x) . rotations
 
 part1 = sumOf (folded . sector) . validRooms
