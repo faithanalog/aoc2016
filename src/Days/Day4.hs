@@ -21,11 +21,10 @@ calcChecksum =
 
   take 5 .                 -- Get the top 5 frequent letters
 
-  concatMap sort .         -- Sort each subgroup of letters. This servers to
+  concatMap sort .         -- Sort each subgroup of letters. This serves to
                            -- alphabetically sort the equal-length lists
                           
-  sortDAndGroupBy length . -- Sort by the length of each group of letters, group
-                           -- letters together
+  sortDAndGroupBy length . -- Sort/group by the frequency of each letter
                           
   sortDAndGroupBy id .     -- Group letters into lists of each letter
 
