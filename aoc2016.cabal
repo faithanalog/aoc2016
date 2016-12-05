@@ -23,6 +23,7 @@ executable aoc2016
                      , Days.Day4
                      , Days.Day5
                      , Days.Day6
+                     , Days.Day7
   default-language:    Haskell2010
   build-depends:       base >= 4.7 && < 5
                      , lens
