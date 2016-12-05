@@ -5,6 +5,8 @@ import Days.Day1
 import Days.Day2
 import Days.Day3
 import Days.Day4
+import Days.Day5
+import Days.Day6
 import System.Environment
 
 days :: [String -> IO ()]
@@ -13,6 +15,8 @@ days =
   , runDay day2
   , runDay day3
   , runDay day4
+  , runDay day5
+  , runDay day6
   ]
 
 main :: IO ()
