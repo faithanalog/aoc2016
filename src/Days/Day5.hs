@@ -5,7 +5,7 @@ module Days.Day5
 import Days.Prelude
 import Crypto.Hash
 import qualified Data.ByteString as B
-import qualified Data.Map as Map
+import qualified Data.Map.Strict as Map
 import Data.Char
 import Data.List
 import Data.Ord
