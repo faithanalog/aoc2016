@@ -1,4 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
 module Days.Day5
   ( day5
   ) where
